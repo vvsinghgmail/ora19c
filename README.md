@@ -12,6 +12,7 @@ Before implementing any procedure in a production or customer environment, users
 All product names, trademarks, and registered trademarks remain the property of their respective owners.
 
 ##References
+
 [Oracle Database 19c Documentation[(https://docs.oracle.com/en/database/oracle/oracle-database/19/?utm_source=chatgpt.com)
 
 [Oracle Database 21c Documentation](https://docs.oracle.com/en/database/oracle/oracle-database/21/?utm_source=chatgpt.com)
