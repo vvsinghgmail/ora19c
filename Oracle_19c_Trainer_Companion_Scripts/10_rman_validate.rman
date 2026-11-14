@@ -1,0 +1,5 @@
+# RMAN target / | READ backup metadata and validate against current target.
+LIST BACKUP SUMMARY;
+RESTORE DATABASE VALIDATE;
+RESTORE PLUGGABLE DATABASE ORCLPDB1 VALIDATE;
+# A successful validation does not replace an end-to-end restore/recovery drill.

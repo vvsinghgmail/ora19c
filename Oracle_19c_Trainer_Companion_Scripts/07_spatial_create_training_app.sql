@@ -1,0 +1,25 @@
+-- WRITABLE | TRAINING_APP only | disposable ORCLPDB1. Run ONCE.
+SHOW USER
+SHOW CON_NAME
+CREATE TABLE training_sites (
+  site_id NUMBER PRIMARY KEY,
+  site_name VARCHAR2(80) NOT NULL,
+  location MDSYS.SDO_GEOMETRY
+);
+INSERT INTO training_sites VALUES (1,'Bengaluru',
+  MDSYS.SDO_GEOMETRY(2001,4326,MDSYS.SDO_POINT_TYPE(77.5946,12.9716,NULL),NULL,NULL));
+INSERT INTO training_sites VALUES (2,'Mysuru',
+  MDSYS.SDO_GEOMETRY(2001,4326,MDSYS.SDO_POINT_TYPE(76.6394,12.2958,NULL),NULL,NULL));
+INSERT INTO training_sites VALUES (3,'Chennai',
+  MDSYS.SDO_GEOMETRY(2001,4326,MDSYS.SDO_POINT_TYPE(80.2707,13.0827,NULL),NULL,NULL));
+COMMIT;
+INSERT INTO user_sdo_geom_metadata (table_name,column_name,diminfo,srid)
+VALUES ('TRAINING_SITES','LOCATION',
+  MDSYS.SDO_DIM_ARRAY(
+    MDSYS.SDO_DIM_ELEMENT('LONGITUDE',-180,180,0.00005),
+    MDSYS.SDO_DIM_ELEMENT('LATITUDE',-90,90,0.00005)),4326);
+COMMIT;
+CREATE INDEX idx_training_sites_spatial ON training_sites(location)
+INDEXTYPE IS MDSYS.SPATIAL_INDEX;
+SELECT index_name,status FROM user_indexes WHERE table_name='TRAINING_SITES';
+-- Spatial metadata/index operations depend on a VALID SDO component.

@@ -1,0 +1,8 @@
+# INSTRUCTOR-CONTROLLED. RMAN connected to CDB$ROOT on disposable ARCHIVELOG VM only.
+# Verify backup disk/FRA before running. Never run on production without change approval.
+SHOW ALL;
+CONFIGURE CONTROLFILE AUTOBACKUP ON;
+BACKUP DATABASE PLUS ARCHIVELOG TAG 'TRAINING_FULL';
+BACKUP PLUGGABLE DATABASE ORCLPDB1 TAG 'TRAINING_PDB';
+LIST BACKUP SUMMARY;
+# IMPORTANT: PDB-only backup alone does not necessarily include required archived redo.
